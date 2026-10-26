@@ -20,7 +20,7 @@ export const siteConfig: SiteConfig = {
 	// Meta property, found in src/components/BaseHead.astro L:42
   ogLocale: "en_US",
   // Determines whether to show the logo in the templates header
-	showLogo: true,
+	showLogo: false,
 	// Date.prototype.toLocaleDateString() parameters, found in src/utils/date.ts.
 	date: {
 		options: {
@@ -33,22 +33,12 @@ export const siteConfig: SiteConfig = {
 
 // Used to generate links in both the Header & Footer.
 export const menuLinks: { path: string; title: string }[] = [
-	{
-		path: "/",
-		title: "Home",
-	},
-	{
-		path: "/about/",
-		title: "About",
-	},
-	{
-		path: "/posts/",
-		title: "Blog",
-	},
-	{
-		path: "/notes/",
-		title: "Notes",
-	},
+	{ path: "/", title: "Home" },
+	{ path: "/skills/", title: "Skills" },
+	{ path: "/projects/", title: "Projects" },
+	{ path: "/experience/", title: "Experience" },
+	{ path: "/education/", title: "Education" },
+	{ path: "/about/", title: "Beyond" },
 ];
 
 // https://expressive-code.com/reference/configuration/
