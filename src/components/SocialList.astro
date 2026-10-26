@@ -11,17 +11,15 @@ const socialLinks: {
 	isWebmention?: boolean;
 	link: string;
 	name: string;
-}[] = [
-	{
-		friendlyName: "Github",
-		link: "https://github.com/chrismwilliams/astro-cactus",
-		name: "mdi:github",
-	},
+}[]= [
+	{ friendlyName: "LinkedIn", link: "https://www.linkedin.com/in/laurenhalll/", name: "mdi:linkedin" },
+	{ friendlyName: "GitHub", link: "https://github.com/laurenhallsy", name: "mdi:github" },
+	{ friendlyName: "Email", link: "mailto:lauren@chezhall.com", name: "mdi:email-outline" },
 ];
 ---
 
 <div class="flex flex-wrap items-end gap-x-2">
-	<p>Find me on</p>
+	<p class="font-semibold">Find me on</p>
 	<ul class="flex flex-1 items-center gap-x-2 sm:flex-initial">
 		{
 			socialLinks.map(({ friendlyName, isWebmention, link, name }) => (
