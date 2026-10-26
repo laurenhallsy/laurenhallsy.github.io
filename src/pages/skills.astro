@@ -1,0 +1,132 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const technical = [
+	{
+		name: "R",
+		level: "Strongest",
+		tools: ["tidyverse", "ggplot2", "sportyR", "Quarto", "nflfastR"],
+		text: "My go-to for analysis. I've cleaned and joined multi-source datasets, engineered features, and fit logistic regression, GLMs, GAMs, and clustering models. I published my PLL expected-goals project as a full Quarto report.",
+		proof: { href: "/projects/#pll-xg", label: "See the PLL xG model" },
+	},
+	{
+		name: "SQL & Database Design",
+		level: "Strong",
+		tools: ["SQL Server", "SQLite", "SSRS", "Star schema"],
+		text: "I've designed relational databases from scratch, including an eight-table dealership system with SSRS reports. I'm now building a star-schema data mart in a data warehousing course.",
+		proof: { href: "/projects/#ferrari-db", label: "See the dealership database" },
+	},
+	{
+		name: "Data Visualization",
+		level: "Strong",
+		tools: ["Tableau", "ggplot2", "Quarto"],
+		text: "I design charts to answer one question at a time. I built a Nike sales dashboard in Tableau and a shot-location map of a real PLL field in R.",
+		proof: { href: "/projects/#nike-dashboard", label: "See the Nike dashboard" },
+	},
+	{
+		name: "Python",
+		level: "Working knowledge",
+		tools: ["Python", "Stanford CS106A"],
+		text: "I learned programming fundamentals through Stanford's CS106A material and built a small search engine in Python. I also use AI coding tools to prototype ideas quickly.",
+	},
+	{
+		name: "Application Development",
+		level: "Working knowledge",
+		tools: ["VB.NET", "Windows Forms", "React (prototype)"],
+		text: "I built a Windows Forms front end on top of a SQL Server database, and I've prototyped consumer app ideas in React.",
+	},
+	{
+		name: "Finance & Markets",
+		level: "Coursework",
+		tools: ["Derivatives", "Futures & swaps", "Interest rate risk"],
+		text: "My Finance minor covers financial markets, investments, mortgage products, and bank management. That helps me talk about budgets, ROI, and risk the way buyers do.",
+	},
+];
+
+const soft = [
+	{
+		title: "Composure under pressure",
+		text: "A goalie gets scored on in every game. The job is to reset right away and make the next save. I bring that same short memory to a no on a cold call.",
+	},
+	{
+		title: "Coachability",
+		text: "Film review means watching your mistakes with your coaches in the room. I'm used to direct feedback and to fixing things by the next practice.",
+	},
+	{
+		title: "Communication",
+		text: "The goalie runs the defense out loud. In class, I turn statistical results into clear presentations that non-technical audiences can follow.",
+	},
+	{
+		title: "Teamwork",
+		text: "From a D1 roster to class project teams like our project-management group and our data-mart team, I'm used to shared goals and clear roles.",
+	},
+	{
+		title: "Time management",
+		text: "I balance practices, travel, and lifts with a full course load, and I've made the Dean's List while doing it.",
+	},
+	{
+		title: "Self-starter",
+		text: "I start things on my own, from data projects I publish to app prototypes and side businesses like pet sitting.",
+	},
+];
+
+const sales = ["Outbound cold calling", "MEDDIC / MEDDPICC", "Qualification & champions", "Go-to-market motions", "AI SDR landscape"];
+---
+
+<PageLayout meta={{ title: "Skills", description: "Lauren Hall's technical and soft skills" }}>
+	<p class="eyebrow">Skills</p>
+	<h1 class="page-title">The toolkit</h1>
+	<p class="lede">
+		I sit where analytics and people meet. I can build the model, and I can explain it to the person
+		who has to make a decision with it.
+	</p>
+
+	<h2 class="section-title">Technical skills</h2>
+	<ul class="grid gap-4 sm:grid-cols-2" role="list">
+		{
+			technical.map((t) => (
+				<li class="card flex flex-col">
+					<div class="flex items-baseline justify-between gap-2">
+						<h3 class="text-accent-2 text-lg font-bold">{t.name}</h3>
+						<span class="text-accent font-mono text-xs">{t.level}</span>
+					</div>
+					<p class="text-muted mt-2 text-sm">{t.text}</p>
+					<div class="mt-3 flex flex-wrap gap-1.5">
+						{t.tools.map((tool) => (
+							<span class="pill">{tool}</span>
+						))}
+					</div>
+					{t.proof && (
+						<a class="cactus-link text-accent mt-4 text-sm font-semibold" href={t.proof.href}>
+							{t.proof.label} →
+						</a>
+					)}
+				</li>
+			))
+		}
+	</ul>
+
+	<h2 class="section-title">Soft skills</h2>
+	<ul class="grid gap-4 sm:grid-cols-3" role="list">
+		{
+			soft.map((s) => (
+				<li class="card">
+					<h3 class="text-accent-2 font-bold">{s.title}</h3>
+					<p class="text-muted mt-2 text-sm">{s.text}</p>
+				</li>
+			))
+		}
+	</ul>
+
+	<h2 class="section-title">Sales foundations</h2>
+	<div class="card">
+		<p class="text-muted text-sm">
+			I'm preparing for a sales career the way I'd prepare for a game: by studying the playbook. I've
+			made outbound calls for DU Athletics, and I'm learning the frameworks modern sales teams use
+			to qualify and run deals.
+		</p>
+		<div class="mt-4 flex flex-wrap gap-2">
+			{sales.map((s) => <span class="pill">{s}</span>)}
+		</div>
+	</div>
+</PageLayout>

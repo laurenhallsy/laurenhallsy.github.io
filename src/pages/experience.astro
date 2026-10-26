@@ -1,0 +1,130 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const roles = [
+	{
+		org: "University of Denver Women's Lacrosse",
+		role: "Goalie · NCAA Division I",
+		when: "2023 – Present",
+		where: "Denver, CO",
+		summary:
+			"I compete as a goalie for a Division I program while carrying a full course load in analytics and finance.",
+		did: [
+			"Train, lift, review film, and travel on a Division I schedule all year.",
+			"Run the defense from the crease by calling out slides, picks, and the ball's location in real time.",
+			"Study opponents' shooting tendencies before games. That's what led to my PLL shot-quality project.",
+		],
+		tech: ["Film and scouting review", "Performance metrics"],
+		soft: ["Composure under pressure", "Communication", "Coachability", "Resilience", "Time management"],
+		project: { href: "/projects/#pll-xg", label: "Related: PLL xG model" },
+	},
+	{
+		org: "University of Denver Athletics",
+		role: "Ticket Sales · Outbound Calling",
+		when: "February 2026",
+		where: "Denver, CO",
+		summary: "A short outbound sales assignment selling season tickets for DU Athletics.",
+		did: [
+			"Cold-called DU alumni and past attendees from an assigned list to sell season tickets.",
+			"Opened conversations with people who weren't expecting my call and kept dialing after a no.",
+			"Got real experience with the top-of-funnel work an SDR does every day.",
+		],
+		tech: ["Outbound prospecting"],
+		soft: ["Persistence", "Handling rejection", "Active listening"],
+	},
+	{
+		org: "Denver City Lax",
+		role: "Volunteer",
+		when: "Ongoing",
+		where: "Denver, CO",
+		summary:
+			"I volunteer with a nonprofit that brings lacrosse to Denver youth, usually with my teammates after games and at team-organized events.",
+		did: [
+			"Help out at youth lacrosse events alongside my DU teammates.",
+			"Represent DU Lacrosse in the Denver community and help kids get excited about the game.",
+		],
+		tech: [],
+		soft: ["Community engagement", "Mentorship", "Teamwork"],
+	},
+	{
+		org: "Pizzeria Delfina",
+		role: "Cashier & Food Runner",
+		when: "High school",
+		where: "Palo Alto, CA",
+		summary: "A busy Bay Area restaurant with nonstop customer interaction.",
+		did: [
+			"Handled orders and payments during rushes while keeping the line moving.",
+			"Coordinated with the kitchen to get food out quickly and correctly.",
+			"Learned to stay friendly and accurate under pressure, which is the same skill a high-volume sales role needs.",
+		],
+		tech: [],
+		soft: ["Customer service", "Composure", "Teamwork"],
+	},
+];
+---
+
+<PageLayout meta={{ title: "Experience", description: "Lauren Hall's work and athletic experience" }}>
+	<p class="eyebrow">Experience</p>
+	<h1 class="page-title">Where I've put in the reps</h1>
+	<p class="lede">
+		Division I athletics taught me how to prepare. Sales and service jobs taught me how to talk to
+		people. Here's what I did in each role and what it taught me.
+	</p>
+
+	<ol class="relative space-y-8 border-s-2 border-accent/30 ps-6" role="list">
+		{
+			roles.map((r) => (
+				<li class="relative">
+					<span class="bg-accent ring-global-bg absolute top-6 -start-[33px] h-4 w-4 rounded-full ring-4" />
+					<article class="card">
+						<div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+							<h2 class="text-accent-2 text-lg font-bold">{r.org}</h2>
+							<p class="text-accent font-mono text-xs">{r.when}</p>
+						</div>
+						<p class="text-accent-2 text-sm font-semibold">
+							{r.role} <span class="text-muted font-normal">· {r.where}</span>
+						</p>
+						<p class="text-muted mt-3 text-sm">{r.summary}</p>
+						<ul class="check-list text-muted mt-3 space-y-1.5 text-sm">
+							{r.did.map((d) => (
+								<li>{d}</li>
+							))}
+						</ul>
+						<div class="mt-4 grid gap-3 text-xs sm:grid-cols-2">
+							{r.tech.length > 0 && (
+								<div>
+									<p class="text-accent-2 mb-1.5 font-semibold">Tools & methods</p>
+									<div class="flex flex-wrap gap-1.5">
+										{r.tech.map((t) => (
+											<span class="pill">{t}</span>
+										))}
+									</div>
+								</div>
+							)}
+							<div>
+								<p class="text-accent-2 mb-1.5 font-semibold">Soft skills</p>
+								<div class="flex flex-wrap gap-1.5">
+									{r.soft.map((s) => (
+										<span class="pill">{s}</span>
+									))}
+								</div>
+							</div>
+						</div>
+						{r.project && (
+							<a class="cactus-link text-accent mt-4 inline-block text-sm font-semibold" href={r.project.href}>
+								{r.project.label} →
+							</a>
+						)}
+					</article>
+				</li>
+			))
+		}
+	</ol>
+
+	<div class="card mt-10 text-sm">
+		<p class="text-accent-2 font-semibold">Want to see the work behind the experience?</p>
+		<p class="text-muted mt-1">
+			My <a class="cactus-link text-accent" href="/projects/">Projects page</a> has the analytics and database work, including code and visuals.
+		</p>
+	</div>
+</PageLayout>

@@ -2,35 +2,87 @@
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
-	description: "I'm a starter theme for Astro.build",
-	title: "About",
+	description: "Lauren Hall beyond the classroom: lacrosse, community, side projects and hobbies",
+	title: "Beyond the Classroom",
 };
+
+const groups = [
+	{
+		icon: "🥍",
+		title: "DU Women's Lacrosse",
+		text: "Being a Division I goalie is my biggest commitment outside of class. Goalies get scored on in every game, so the position is mostly about mental reps: forget the last goal, read the next shooter, and keep talking to your defense. It's also why I got curious about shot data in the first place.",
+	},
+	{
+		icon: "🤝",
+		title: "Denver City Lax",
+		text: "I volunteer with Denver City Lax, a nonprofit that brings lacrosse to Denver kids, often with my teammates after games. Seeing a kid figure out the sport is one of the best parts of my week.",
+	},
+	{
+		icon: "📱",
+		title: "Building side projects",
+		text: "I like turning ideas into prototypes. I've designed Reed, a reading and vocabulary app for students, and Flock, a birdwatching social app concept for Gen Z, complete with a React prototype and a pitch deck.",
+	},
+];
+
+const funFacts = [
+	{ q: "Hometown", a: "Menlo Park in the San Francisco Bay Area, which is where my interest in tech started." },
+	{ q: "Side hustle", a: "Pet sitting, including a neighbor's flock of backyard chickens." },
+	{ q: "Collection", a: "Jellycat plush toys. The collection keeps growing." },
+	{ q: "Currently watching", a: "Landman" },
+	{ q: "Favorite stat", a: "SPOE: Shooting % Over Expectation. I created it." },
+	{ q: "December plans", a: "Visiting Wall Street with my Walk Down Wall Street class." },
+];
 ---
 
 <PageLayout meta={meta}>
-	<h1 class="title mb-12">About</h1>
-	<div class="prose prose-sm prose-cactus max-w-none">
-		<p>
-			Hi, I’m a starter Astro. I’m particularly great for getting you started with your own blogging
-			website.
-		</p>
-		<p>Here are my some of my awesome built in features:</p>
-		<ul class="list-inside list-disc" role="list">
-			<li>I'm ultra fast as I'm a static site</li>
-			<li>I'm fully responsive</li>
-			<li>I come with a light and dark mode</li>
-			<li>I'm easy to customise and add additional content</li>
-			<li>I have Tailwind CSS styling</li>
-			<li>Shiki code syntax highlighting</li>
-			<li>Satori for auto generating OG images for blog posts</li>
-		</ul>
-		<p>
-			Clone or fork my <a
-				class="cactus-link inline-block"
-				href="https://github.com/chrismwilliams/astro-cactus"
-				rel="noreferrer"
-				target="_blank">repo</a
-			> if you like me!
-		</p>
+	<p class="eyebrow">Beyond the Classroom</p>
+	<h1 class="page-title">The rest of the story</h1>
+	<p class="lede">
+		Grades and a résumé don't tell you everything. Here's what I'm part of, what I build for fun, and a
+		few things you might ask me about over coffee.
+	</p>
+
+	<div class="grid gap-4 sm:grid-cols-3">
+		{
+			groups.map((g) => (
+				<article class="card">
+					<p class="text-3xl" aria-hidden="true">{g.icon}</p>
+					<h2 class="text-accent-2 mt-3 font-bold">{g.title}</h2>
+					<p class="text-muted mt-2 text-sm">{g.text}</p>
+				</article>
+			))
+		}
 	</div>
+
+	<h2 class="section-title">From the crease to the spreadsheet</h2>
+	<div class="grid items-center gap-6 sm:grid-cols-[1fr_1fr]">
+		<figure class="figure">
+			<img alt="Bar chart showing shot success rate by distance from goal" loading="lazy" src="/images/pll-distance.jpg" />
+			<figcaption>A question from the goal crease, tested with 7,745 pro shots.</figcaption>
+		</figure>
+		<div class="text-muted space-y-3 text-sm">
+			<p>
+				After enough games in goal, I had a theory: the shots that beat me most weren't always the
+				close ones. They came from angles that opened up the cage. So I tested that theory on
+				Premier Lacrosse League data.
+			</p>
+			<p>
+				Distance turned out not to matter once you account for angle and assists. That's the kind of
+				question I love: one that comes from real experience and gets answered with data.
+			</p>
+			<a class="cactus-link text-accent font-semibold" href="/projects/#pll-xg">See the full project →</a>
+		</div>
+	</div>
+
+	<h2 class="section-title">Ask me about</h2>
+	<dl class="grid gap-3 sm:grid-cols-2">
+		{
+			funFacts.map((f) => (
+				<div class="card">
+					<dt class="text-accent font-mono text-xs font-semibold tracking-widest uppercase">{f.q}</dt>
+					<dd class="text-accent-2 mt-1 text-sm">{f.a}</dd>
+				</div>
+			))
+		}
+	</dl>
 </PageLayout>

@@ -1,0 +1,198 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const results = [
+	{ predictor: "Distance (yards)", est: "−0.001", p: "0.60", sig: false },
+	{ predictor: "Shot angle (degrees)", est: "−0.038", p: "< 0.001", sig: true },
+	{ predictor: "Assisted shot", est: "+0.438", p: "< 0.001", sig: true },
+];
+
+const more = [
+	{
+		id: "ferrari-db",
+		title: "Ferrari Dealership Information System",
+		course: "INFO 3240 · Database Design",
+		tools: ["SQL Server", "VB.NET", "Windows Forms", "SSRS"],
+		problem:
+			"A dealership needs one system to track its inventory, customers, and sales, not a collection of spreadsheets.",
+		work: "Designed and built an eight-table relational database in SQL Server with a VB.NET Windows Forms front end and SSRS reports for management. It grew out of an earlier SQLite version I built in INFO 3140.",
+		challenge:
+			"Translating business rules into keys and relationships, then wiring the forms so a non-technical user can't break the data.",
+		artifacts: "Database schema, Windows Forms application, SSRS reports, and recorded video walkthroughs.",
+		value: "Gives a dealership one source of truth for inventory and sales reporting.",
+	},
+	{
+		id: "surf-data-mart",
+		title: "Surf Shop Data Mart",
+		course: "INFO Data Warehousing · Fall 2026 (in progress)",
+		tools: ["Star schema", "Dimensional modeling", "SQL"],
+		problem:
+			"A surf shop wants to analyze sales by product, time, and customer without slowing down its day-to-day systems.",
+		work: "Our team is designing a star-schema data mart: identifying the business process, choosing the grain, and building fact and dimension tables.",
+		challenge: "Agreeing as a team on the grain and the dimensions that answer the shop's real questions.",
+		artifacts: "Dimensional model and data mart (in progress).",
+		value: "Fast, reliable answers to questions like which products sell best in which season.",
+	},
+	{
+		id: "nike-dashboard",
+		title: "Nike Sales Dashboard",
+		course: "Analytics coursework",
+		tools: ["SQL", "Tableau", "R"],
+		problem: "Sales leaders need to see performance across products and regions at a glance.",
+		work: "Queried and prepared sales data with SQL and R, then designed an interactive Tableau dashboard.",
+		challenge: "Choosing a few views that answer the main questions instead of cramming every metric onto one screen.",
+		artifacts: "Interactive Tableau dashboard.",
+		value: "Turns raw sales tables into a view a manager can act on in minutes.",
+	},
+];
+---
+
+<PageLayout meta={{ title: "Projects", description: "Analytics and database projects by Lauren Hall" }}>
+	<p class="eyebrow">Projects</p>
+	<h1 class="page-title">Work examples</h1>
+	<p class="lede">
+		Each project starts with a business question. Here's the problem, what I built, what got in the
+		way, and why it matters.
+	</p>
+
+	<!-- Featured project -->
+	<article class="card p-0" id="pll-xg">
+		<div class="border-b border-black/10 p-6 dark:border-white/10">
+			<p class="eyebrow">Featured · Sports Analytics</p>
+			<h2 class="text-accent-2 mt-2 text-2xl font-bold">What Makes a Shot Dangerous in the PLL?</h2>
+			<p class="text-muted mt-2">
+				An expected-goals (xG) model built on 7,745 Premier Lacrosse League shots to measure what
+				actually makes a shot dangerous, and which players finish above or below the quality of
+				their chances.
+			</p>
+			<div class="mt-4 flex flex-wrap gap-1.5">
+				{["R", "tidyverse", "ggplot2", "sportyR", "Logistic regression", "Quarto"].map((t) => <span class="pill">{t}</span>)}
+			</div>
+			<div class="mt-5 flex flex-wrap gap-3">
+				<a class="btn" href="https://laurenhallsy.github.io/pll-shot-quality/" rel="noreferrer" target="_blank">
+					Read the full analysis →
+				</a>
+				<a class="btn-ghost" href="https://github.com/laurenhallsy/pll-shot-quality" rel="noreferrer" target="_blank">
+					View on GitHub
+				</a>
+			</div>
+		</div>
+
+		<div class="space-y-8 p-6">
+			<section>
+				<h3 class="text-accent-2 font-bold">The business problem</h3>
+				<p class="text-muted mt-2 text-sm">
+					Teams decide who to sign, play, and pay partly on goals scored. But raw goal totals mix two
+					things together: how good a player's chances are and how well they finish them. Most people
+					assume distance is what makes a shot dangerous. As a Division I goalie, I suspected angle
+					mattered more, because a sharp-angle shot lets the goalie cover much more of the cage. I
+					wanted to test that with data and give coaches a fairer way to evaluate shooters.
+				</p>
+			</section>
+
+			<section>
+				<h3 class="text-accent-2 font-bold">What I did</h3>
+				<ol class="text-muted mt-2 list-inside list-decimal space-y-1 text-sm">
+					<li><strong>Cleaned and joined</strong> shot data (2019–2021) with player positions and college data, and fixed numeric columns stored as blank strings.</li>
+					<li><strong>Engineered features</strong> by converting pixel coordinates to yards and calculating each shot's distance and angle to the goal.</li>
+					<li><strong>Explored</strong> shot outcomes, success rate by distance, distance by position, and shot locations on a PLL field.</li>
+					<li><strong>Modeled</strong> goal probability with logistic regression: <code>glm(is_goal ~ dist_yards + shot_angle + is_assisted, family = binomial)</code>.</li>
+					<li><strong>Created SPOE</strong> (Shooting % Over Expectation): a player's actual shooting % minus the average xG of their shots, for players with at least 30 shots.</li>
+					<li><strong>Presented</strong> the findings in a Quarto report and a slide presentation with a full speaker script.</li>
+				</ol>
+			</section>
+
+			<div class="grid gap-4 sm:grid-cols-2">
+				<figure class="figure">
+					<img alt="Line chart: predicted goal probability falls as shot angle increases" loading="lazy" src="/images/pll-xg-by-angle.jpg" />
+					<figcaption>Straight-on shots carry the highest xG (~30%); probability drops sharply past 50°.</figcaption>
+				</figure>
+				<figure class="figure">
+					<img alt="Shot locations on a PLL field for 2019, 2020 and 2021, colored by goal or no goal" loading="lazy" src="/images/pll-shot-map.jpg" />
+					<figcaption>Every shot from 2019–2021 plotted on a real PLL field with sportyR.</figcaption>
+				</figure>
+			</div>
+
+			<section>
+				<h3 class="text-accent-2 font-bold">Model results</h3>
+				<div class="mt-3 overflow-x-auto">
+					<table class="w-full text-left text-sm">
+						<thead>
+							<tr class="border-b border-dashed border-current/30">
+								<th class="py-2 pe-4">Predictor</th>
+								<th class="py-2 pe-4">Estimate</th>
+								<th class="py-2 pe-4">p-value</th>
+								<th class="py-2">Significant?</th>
+							</tr>
+						</thead>
+						<tbody>
+							{
+								results.map((r) => (
+									<tr class="border-b border-black/5 dark:border-white/5">
+										<td class="py-2 pe-4">{r.predictor}</td>
+										<td class="py-2 pe-4 font-mono">{r.est}</td>
+										<td class="py-2 pe-4 font-mono">{r.p}</td>
+										<td class:list={["py-2 font-semibold", r.sig ? "text-accent" : "text-muted"]}>{r.sig ? "Yes" : "No"}</td>
+									</tr>
+								))
+							}
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<section>
+				<h3 class="text-accent-2 font-bold">Challenges</h3>
+				<ul class="check-list text-muted mt-2 space-y-2 text-sm">
+					<li><strong>Imperfect location data.</strong> Shots were recorded in pixel coordinates, so I had to convert them to yards before distance and angle meant anything. That makes them approximations, and I say so in the report.</li>
+					<li><strong>Mismatched seasons.</strong> Position data came from 2023–2026 rosters, so about 35% of 2019–2021 shots couldn't be matched to a position. I kept those shots in the model and limited position-level claims.</li>
+					<li><strong>Messy formats.</strong> Percentage columns stored as blank strings had to be cleaned before any modeling could start.</li>
+				</ul>
+			</section>
+
+			<figure class="figure">
+				<img alt="Bar chart of the top 15 players by Shooting Percentage Over Expectation" loading="lazy" src="/images/pll-spoe-top15.jpg" />
+				<figcaption>SPOE leaders: Eric Law converts nearly 19 percentage points above his expected rate.</figcaption>
+			</figure>
+
+			<section>
+				<h3 class="text-accent-2 font-bold">Business value</h3>
+				<ul class="check-list text-muted mt-2 space-y-2 text-sm">
+					<li><strong>Challenges a common assumption.</strong> Once angle and assists are accounted for, distance isn't significant (p = 0.60). Coaching and scouting focused on distance may be missing the real driver of good shots.</li>
+					<li><strong>Puts a value on ball movement.</strong> An assist raises the odds of scoring by about 55%, which supports an offense built around passing.</li>
+					<li><strong>Finds overvalued and undervalued players.</strong> Several well-known shooters get high-quality looks but finish below expectation, while others are quietly efficient. That's useful for roster, contract, and game-planning decisions.</li>
+					<li><strong>Helps goalies.</strong> It's a data-backed way to show which angles to take away first.</li>
+				</ul>
+			</section>
+		</div>
+	</article>
+
+	<h2 class="section-title">More projects</h2>
+	<div class="space-y-4">
+		{
+			more.map((p) => (
+				<article class="card" id={p.id}>
+					<p class="eyebrow">{p.course}</p>
+					<h3 class="text-accent-2 mt-1 text-lg font-bold">{p.title}</h3>
+					<div class="mt-2 flex flex-wrap gap-1.5">
+						{p.tools.map((t) => (
+							<span class="pill">{t}</span>
+						))}
+					</div>
+					<dl class="mt-4 grid gap-x-6 gap-y-3 text-sm sm:grid-cols-[140px_1fr]">
+						<dt class="text-accent-2 font-semibold">Problem</dt>
+						<dd class="text-muted">{p.problem}</dd>
+						<dt class="text-accent-2 font-semibold">What I did</dt>
+						<dd class="text-muted">{p.work}</dd>
+						<dt class="text-accent-2 font-semibold">Challenge</dt>
+						<dd class="text-muted">{p.challenge}</dd>
+						<dt class="text-accent-2 font-semibold">Artifacts</dt>
+						<dd class="text-muted">{p.artifacts}</dd>
+						<dt class="text-accent-2 font-semibold">Value</dt>
+						<dd class="text-muted">{p.value}</dd>
+					</dl>
+				</article>
+			))
+		}
+	</div>
+</PageLayout>
