@@ -1,4 +1,5 @@
 ---
+import ResumePreview from "@/components/ResumePreview.astro";
 import PageLayout from "@/layouts/Base.astro";
 
 const roles = [
@@ -70,6 +71,10 @@ const roles = [
 		Division I athletics taught me how to prepare. Sales and service jobs taught me how to talk to
 		people. Here's what I did in each role and what it taught me.
 	</p>
+
+	<div class="mb-10">
+		<ResumePreview />
+	</div>
 
 	<ol class="relative space-y-8 border-s-2 border-accent/30 ps-6" role="list">
 		{

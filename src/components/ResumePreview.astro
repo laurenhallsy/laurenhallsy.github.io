@@ -1,0 +1,122 @@
+---
+const pdf = "/Lauren_Hall_SDR_Resume.pdf";
+const img = "/resume-preview.png";
+---
+
+<resume-preview>
+	<button type="button" class="btn-97" data-open>Check out my resume →</button>
+
+	<dialog class="resume-modal" aria-label="Resume preview">
+		<div class="resume-bar">
+			<a href={pdf} download="Lauren_Hall_SDR_Resume.pdf">Download PDF</a>
+			<a href={pdf} target="_blank" rel="noopener">Open full size</a>
+			<button type="button" data-close aria-label="Close">✕</button>
+		</div>
+		<img src={img} alt="Lauren Hall's resume" width="1700" height="2200" loading="lazy" />
+	</dialog>
+</resume-preview>
+
+<script>
+	class ResumePreview extends HTMLElement {
+		connectedCallback() {
+			const dialog = this.querySelector("dialog")!;
+			this.querySelector("[data-open]")!.addEventListener("click", () => dialog.showModal());
+			this.querySelector("[data-close]")!.addEventListener("click", () => dialog.close());
+			dialog.addEventListener("click", (e) => {
+				if (e.target === dialog) dialog.close();
+			});
+		}
+	}
+	if (!customElements.get("resume-preview")) customElements.define("resume-preview", ResumePreview);
+</script>
+
+<style>
+	.btn-97,
+	.btn-97 *,
+	.btn-97 :after,
+	.btn-97 :before,
+	.btn-97:after,
+	.btn-97:before {
+		border: 0 solid;
+		box-sizing: border-box;
+	}
+	.btn-97 {
+		-webkit-tap-highlight-color: transparent;
+		-webkit-appearance: button;
+		font-family:
+			ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue,
+			Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+			Noto Color Emoji;
+		font-size: 100%;
+		line-height: 1.5;
+		margin: 0;
+		cursor: pointer;
+		background: #fff;
+		border: 1px solid;
+		border-radius: 999px;
+		color: #000;
+		display: block;
+		font-weight: 900;
+		overflow: hidden;
+		padding: 1.2rem 3rem;
+		position: relative;
+		text-transform: uppercase;
+		transition: 0.2s;
+	}
+	.btn-97:hover {
+		box-shadow:
+			0 6px 0 -4px #fff,
+			0 9px 0 -4px #aaa,
+			0 12px 0 -4px #000;
+		transform: translateY(-5px);
+	}
+	:global([data-theme="dark"]) .btn-97:hover {
+		box-shadow:
+			0 6px 0 -4px var(--color-global-bg),
+			0 9px 0 -4px #aaa,
+			0 12px 0 -4px #fff;
+	}
+
+	.resume-modal {
+		width: min(850px, 92vw);
+		max-height: 90vh;
+		padding: 0;
+		border: none;
+		border-radius: 10px;
+		overflow: auto;
+		background: #fff;
+	}
+	.resume-modal::backdrop {
+		background: rgb(0 0 0 / 0.6);
+	}
+	.resume-bar {
+		position: sticky;
+		top: 0;
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+		padding: 0.6rem 1rem;
+		background: #fff;
+		border-bottom: 1px solid #ddd;
+		font-size: 0.9rem;
+		color: #000;
+	}
+	.resume-bar a {
+		font-weight: 600;
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.resume-bar button {
+		margin-left: auto;
+		background: none;
+		border: none;
+		font-size: 1.1rem;
+		cursor: pointer;
+		color: #000;
+	}
+	.resume-modal img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+</style>
